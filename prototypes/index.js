@@ -21,10 +21,16 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
+    let theOrangeOnes= [];
+    kitties.forEach(cat => {
+      if(cat.color === 'orange') {
+        theOrangeOnes.push(cat.name);
+      }
+    });
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = theOrangeOnes;
     return result;
 
     // Annotation:
@@ -33,8 +39,12 @@ const kittyPrompts = {
 
   sortByAge() {
     // Sort the kitties by their age
+    let catAge = kitties.sort((catA, catB) => {
+      return catB.age - catA.age;
+    });
+      
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = catAge;
     return result;
 
     // Annotation:
@@ -54,8 +64,12 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
+    let idk = kitties.filter(cat => {
+      return cat.age += 2;
+    });
+    
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = idk;
     return result;
   }
 };
@@ -87,7 +101,16 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let newClubs = clubs.reduce((acc, elem) => {
+      elem.members.forEach(member => {
+        if (!acc[member]) {
+          acc[member] = [];
+        }
+        acc[member].push(elem.club);
+      });
+      return acc;
+    }, {});
+    const result = newClubs;
     return result;
 
     // Annotation:
